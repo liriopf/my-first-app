@@ -1,23 +1,29 @@
 package com.codely.demo
-
 import java.time.LocalDate
-
+fun dateDefaultWhenNull(readLine: String?) {
+    val input = LocalDate.parse(readLine ?: "1947-08-14") // Si llega null coge fecha por defecto
+    println("Fecha por defecto cuando es null $input ${input.dayOfWeek}")
+}
+fun dateIgnoreWhenNull(readLine: String?) {
+    readLine.let {
+         // Solo se procesa si no es null
+        val input = LocalDate.parse(readLine)
+        println("NO se ejecuta cuando es null $input ${input.dayOfWeek}")
+    }
+}
+fun dateNeverNull(readLine: String?) {
+    val input = LocalDate.parse(readLine!!) // No se espera null así que lanza nullPointer
+    println("Lanza excepción cuando es null $input ${input.dayOfWeek}")
+}
 fun main() {
     println("Indroduce una fecha con formato <yyyy-MM-dd>")
-//    val readLine: String? = readLine()
-    val readLine: String? = null
-    //val input = LocalDate.parse(readLine?:"1947-08-14") //Si llega null coge fecha por defecto
-//    val input = LocalDate.parse(readLine!!) //!! se usa para indicar que ese valor nunca va a ser null
-                                              //    , si llegase un null rompe en esta linea
-    //    println("has escrito $input ${input.dayOfWeek}")
+    val readLine: String? = readLine()
 
-    readLine?.let {
-        //Solo entra aqui cuando read line no es null
-        val input = LocalDate.parse(readLine)
-        println("has escrito $input ${input.dayOfWeek}")
-    }
+    dateDefaultWhenNull(readLine)
+    dateIgnoreWhenNull(readLine)
+    dateNeverNull(readLine)
 
-
-
-
+    dateDefaultWhenNull(null)
+    dateIgnoreWhenNull(null)
+    dateNeverNull(null)
 }
