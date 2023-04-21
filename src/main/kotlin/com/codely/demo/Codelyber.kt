@@ -6,7 +6,7 @@ fun dateDefaultWhenNull(readLine: String?) {
 }
 fun dateIgnoreWhenNull(readLine: String?) {
     readLine.let {
-         // Solo se procesa si no es null
+        // Solo se procesa si no es null
         val input = LocalDate.parse(readLine)
         println("NO se ejecuta cuando es null $input ${input.dayOfWeek}")
     }
